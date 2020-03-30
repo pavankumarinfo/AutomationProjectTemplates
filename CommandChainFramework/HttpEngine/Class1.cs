@@ -1,8 +1,9 @@
 ﻿using System;
 
-namespace HttpEngine
+namespace CommandChainFramework.HttpEngine
 {
-    public class Class1
+    public static class HttpProcessor
     {
+
     }
 }

@@ -5,4 +5,28 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="GetAsyncTests.cs" />
+    <Compile Remove="GetStringAsyncTests.cs" />
+    <Compile Remove="PostAsyncTests.cs" />
+    <Compile Remove="Program.cs" />
+    <Compile Remove="PutAsyncTests.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.1" />
+    <PackageReference Include="RestSharp" Version="106.10.1" />
+    <PackageReference Include="Shouldly" Version="3.0.2" />
+    <PackageReference Include="xunit.core" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessModel\BusinessModel.csproj" />
+    <ProjectReference Include="..\RestHttpEngine\RestHttpEngine.csproj" />
+  </ItemGroup>
+
 </Project>
