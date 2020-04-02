@@ -1,20 +1,20 @@
-﻿using System;
-using CommandChainFramework.BusinessModel;
-using Shouldly;
-using Xunit;
+﻿using CommandChainFramework.BusinessModel;
 
-namespace CommandChainFramework.UnitTest
+
+
+namespace CommandChainFramework.Nunit
 {
     class environmentNames
     {
-        public const string TestEnvironment  = "test";
-        public const string BetaEnvironment  = "beta";
+        public const string TestEnvironment = "test";
+        public const string BetaEnvironment = "beta";
         public const string TestRefactorEnvironment = "testrefactor";
         public const string BetaRefactorEnvironment = "betarefactor";
     }
-    public class ReggieTests : BaseTest
+    [TestFixture]
+    public class TestClass : BaseTest
     {
-        [Fact]
+        [Test]
         public void getReggieRequest()
         {
             GetInstance<ReggieGet>()
@@ -22,11 +22,11 @@ namespace CommandChainFramework.UnitTest
             assertresponsecode.ShouldBe("OK");
         }
 
-        [Theory]
-        [InlineData(environmentNames.TestEnvironment)]
-        [InlineData(environmentNames.BetaEnvironment)]
-        [InlineData(environmentNames.TestRefactorEnvironment)]
-        [InlineData(environmentNames.BetaRefactorEnvironment)]
+        [Test]
+        [TestCase(environmentNames.TestEnvironment)]
+        [TestCase(environmentNames.BetaEnvironment)]
+        [TestCase(environmentNames.TestRefactorEnvironment)]
+        [TestCase(environmentNames.BetaRefactorEnvironment)]
         public void getReggieRequest_envBasedTest(string environmentname)
         {
             GetInstance<ReggieGet>().GetEnvSettings(environmentname, out var envName)

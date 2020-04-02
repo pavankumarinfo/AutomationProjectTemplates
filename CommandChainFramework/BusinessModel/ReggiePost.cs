@@ -1,6 +1,6 @@
 ﻿namespace CommandChainFramework.BusinessModel
 {
-    public class ReggiePost: Base<ReggiePost>
+    public class ReggiePost: BusinessBase
     {
         public void ReggiePostCal()
         {

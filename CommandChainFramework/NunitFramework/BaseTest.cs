@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace CommandChainFramework.BusinessModel
+namespace CommandChainFramework.Nunit
 {
-    public class BusinessBase
+    public class BaseTest
     {
         public T GetInstance<T>()
         {

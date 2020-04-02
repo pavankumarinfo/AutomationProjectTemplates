@@ -4,53 +4,39 @@ namespace CommandChainFramework.BusinessModel
 {
     public class ReggieBase
     {
-        public const string ReggieHttpDomain = "http://";
-        public const string ReggieRefactorHttpsDomain = "https://";
-        public const string ReggieTestDomain = "reggieTest";
-        public const string ReggieRefactorTestDomain = "reggieRefactorTest";
-        public const string ReggieBetaDomain = "reggieBeta";
-        public const string ReggieRefactorBetaDomain = "reggierefactorBeta";
-        public const string ReggieQuismoGet = "/api/v1/Quismo";
+        public static string ReggieHttpDomain { get; } = "http://";
+        public static string ReggieRefactorHttpsDomain { get; } = "https://";
+        public static string ReggieTestDomain { get; } = "reggieTest";
+        public static string ReggieRefactorTestDomain { get; } = "reggieRefactorTest";
+        public static string ReggieBetaDomain { get; } = "reggieBeta";
+        public static string ReggieRefactorBetaDomain { get; } = "reggierefactorBeta";
+        public static string ReggieQuismoGet { get; } = "/api/v1/Quismo";
 
-        #region "old code"
-        public static string getTestEnvSetting()
+        public ReggieBase GetTestEnvSetting(out string domainvalue)
         {
-            return ReggieHttpDomain + ReggieTestDomain;
+            domainvalue = ReggieHttpDomain + ReggieTestDomain;
+            return this;
         }
-        public static string getTestRefactorTestEnvSetting()
+        public ReggieBase GetTestRefactorEnvSetting(out string domainvalue)
         {
-            return ReggieRefactorHttpsDomain + ReggieRefactorTestDomain;
+            domainvalue = ReggieRefactorHttpsDomain + ReggieRefactorTestDomain;
+            return this;
         }
-        public static string getBetaEnvSetting()
+        public ReggieBase GetBetaEnvSetting(out string domainvalue)
         {
-            return ReggieHttpDomain + ReggieBetaDomain;
+            domainvalue = ReggieHttpDomain + ReggieBetaDomain;
+            return this;
         }
-        public static string getBetaRefactorTestEnvSetting()
+        public ReggieBase GetBetaRefactorEnvSetting(out string domainvalue)
         {
-            return ReggieRefactorHttpsDomain + ReggieRefactorBetaDomain;
+            domainvalue = ReggieRefactorHttpsDomain + ReggieRefactorBetaDomain;
+            return this;
         }
-        #endregion
 
-        //public ReggieBase getTestEnvSetting(out string domainvalue)
-        //{
-        //    domainvalue = ReggieHttpDomain + ReggieTestDomain;
-        //    return this;
-        //}
-        //public ReggieBase getTestRefactorTestEnvSetting(out string domainvalue)
-        //{
-        //    domainvalue = ReggieRefactorHttpsDomain + ReggieRefactorTestDomain;
-        //    return this;
-        //}
-        //public ReggieBase getBetaEnvSetting(out string domainvalue)
-        //{
-        //    domainvalue = ReggieHttpDomain + ReggieBetaDomain;
-        //    return this;
-        //}
-        //public ReggieBase getBetaRefactorTestEnvSetting(out string domainvalue)
-        //{
-        //    domainvalue = ReggieRefactorHttpsDomain + ReggieRefactorBetaDomain;
-        //    return this;
-        //}
+        public T GetInstance<T>()
+        {
+            return (T)Activator.CreateInstance(typeof(T));
+        }
 
     }
 

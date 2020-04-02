@@ -8,9 +8,11 @@
   <ItemGroup>
     <Compile Remove="GetAsyncTests.cs" />
     <Compile Remove="GetStringAsyncTests.cs" />
+    <Compile Remove="NUnitTestClass.cs" />
     <Compile Remove="PostAsyncTests.cs" />
     <Compile Remove="Program.cs" />
     <Compile Remove="PutAsyncTests.cs" />
+    <Compile Remove="TestClass.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,7 +28,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BusinessModel\BusinessModel.csproj" />
-    <ProjectReference Include="..\RestHttpEngine\RestHttpEngine.csproj" />
   </ItemGroup>
 
 </Project>

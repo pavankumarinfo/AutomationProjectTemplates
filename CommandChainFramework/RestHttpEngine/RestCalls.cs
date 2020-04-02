@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 
-namespace CommandChainFramework.RestHttp
+namespace CommandChainFramework.RestHttpEngine
 {
     class RequestBodyCapturer
     {
@@ -32,28 +32,40 @@ namespace CommandChainFramework.RestHttp
             return streamReader.ReadToEnd();
         }
     }
-    public class RestCalls
+    public class RestCalls: BaseHttp
     {
-        private readonly RestClient _restClient;
+        private RestClient _restClient;
         
-        public RestCalls(Uri uri)
+        public RestCalls getHttpInstance(Uri uri)
         {
-            _restClient = new RestClient(uri);
+            this._restClient = new RestClient(uri);
+            return this;
         }
 
-        public RestCalls(string reggieDomain)
+        public RestCalls getHttpInstance(string reggieDomain)
         {
-            _restClient=new RestClient(new Uri(reggieDomain,UriKind.RelativeOrAbsolute));
+            this._restClient=new RestClient(new Uri(reggieDomain,UriKind.RelativeOrAbsolute));
+            return this;
         }
 
-        public IRestResponse httpGet(string getUrl)
+        public RestCalls HttpGetAndAssertCalls(string getUrl,out string statuscode)
         {
             var request = new RestRequest(getUrl, Method.GET);
-            var response = _restClient.Execute<HttpResponseMessage>(request);
-            return response;
+            var response= this._restClient.Execute<HttpResponseMessage>(request);
+            statuscode = response.StatusCode.ToString();
+            return this;
         }
 
-        public void httpPost(string contentType,string bodyData)
+        public RestCalls AssertHttpGet(IRestResponse response)
+        {
+            if (!response.IsSuccessful)
+            {
+                new Exception(response.StatusCode + " Status Description" + response.StatusDescription);
+            }
+            return this;
+        }
+
+        public void httpPostAndAssertCalls(string contentType,string bodyData)
         {
             const Method httpMethod = Method.POST;
 
@@ -63,7 +75,7 @@ namespace CommandChainFramework.RestHttp
 
             var resetEvent = new ManualResetEvent(false);
 
-           _restClient.ExecuteAsync(request, response => resetEvent.Set());
+           this._restClient.ExecuteAsync(request, response => resetEvent.Set());
             resetEvent.WaitOne();
         }
     }
