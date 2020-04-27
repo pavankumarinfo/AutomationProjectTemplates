@@ -7,14 +7,14 @@ namespace CommandChainFramework.BusinessModel
         public ReggieGet getReggieRequest(string getUrl, out string responsestatus)
         {
             string env;
-            GetInstance<ReggieBase>().GetBetaEnvSetting(out env).GetInstance<RestCalls>().getHttpInstance(env)
+            GetInstance<ReggieBase>().GetBetaEnvSetting(out env).GetInstance<RestCalls>().GetHttpInstance(env)
                 .HttpGetAndAssertCalls(getUrl, out responsestatus);
             return this;
         }
 
         public ReggieGet getReggieRequest(string getUrl, string environmentdomain, out string responsestatus)
         {
-            GetInstance<RestCalls>().getHttpInstance(environmentdomain)
+            GetInstance<RestCalls>().GetHttpInstance(environmentdomain)
                  .HttpGetAndAssertCalls(getUrl, out responsestatus);
             return this;
         }

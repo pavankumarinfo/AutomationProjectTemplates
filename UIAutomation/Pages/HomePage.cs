@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UIAutomation.Pages
+﻿namespace UIAutomation.Pages
 {
     public class HomePage:BaseTest
     {
-        public HomePage setHomePage(string url)
+        private readonly Helper _helper = new Helper();
+        public HomePage SetHomePage(string url)
         {
-            GetInstance<Helper>().NavigateToUrl(url);
+            _helper.NavigateToUrl(url);
             return this;
         }
     }

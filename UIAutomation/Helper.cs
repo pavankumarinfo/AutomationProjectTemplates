@@ -5,13 +5,14 @@ namespace UIAutomation
 {
     public class Helper : BaseTest
     {
-        Helper()
-        {
-            
-        }
         public Helper NavigateToUrl(string url)
         {
             _driver.Navigate().GoToUrl(url);
+            return this;
+        }
+        public Helper NavigateToUrl(string url,IWebDriver _webDriver)
+        {
+            _webDriver.Navigate().GoToUrl(url);
             return this;
         }
 
@@ -27,7 +28,12 @@ namespace UIAutomation
             elementByName=_driver.FindElement(By.Name(elementName));
             return this;
         }
-
+        
+        public IWebElement GetWebElementByCssElement(string elementID)
+        {
+            Wait(1);
+            return _driver.FindElement(By.CssSelector(elementID));
+        }
         public IWebElement GetWebElementById(string elementID)
         {
             Wait(1);
@@ -52,7 +58,7 @@ namespace UIAutomation
             webElement.SendKeys(inputString);
         }
 
-        public void clickButton(IWebElement webElement)
+        public void ClickButton(IWebElement webElement)
         {
             Wait(1);
             webElement.Click();
@@ -61,6 +67,12 @@ namespace UIAutomation
         public Helper Wait(int seconds)
         {
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(seconds);
+            return this;
+        }
+
+        public Helper quitDriver()
+        {
+            _driver.Quit();
             return this;
         }
     }
